@@ -17,13 +17,13 @@ mongo.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   }, (err, client) => {
+const db = client.db('nest')
+const collection = db.collection('events')
   if (err) {
     console.error(err)
     return
   }
 })
-const db = client.db('nest')
-const collection = db.collection('events')
 
 app.get("/", function(req, res){
     collection.find().toArray((err, items) => {
