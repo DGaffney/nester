@@ -100,7 +100,7 @@ def extract_latest_events():
                 "importance": event["importance"],
                 "peak_sound_intensity": event["peak_sound_intensity"],
                 "duration": event["duration"],
-                "time": datetime.datetime.fromtimestamp(int(event["_timestamp"]))
+                "time": datetime.datetime.fromtimestamp(float(event["_timestamp"]))
             })
 
 def run():

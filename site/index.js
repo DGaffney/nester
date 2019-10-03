@@ -26,7 +26,7 @@ connection.then(() => {
 // Use connect method to connect to the Server
 const findDocuments = function(db, callback) {
 	// Get the documents collection
-	const collection = db.collection('scored_posts');
+	const collection = db.collection('events');
 	// Find some documents
 	collection.find({}).sort([
 		['created_at', -1]
