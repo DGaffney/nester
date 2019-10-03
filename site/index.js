@@ -4,6 +4,9 @@ var config = require('config');
 fs   = require('fs');
 var express = require('express');
 var app = express();
+var engines = require('consolidate');
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
