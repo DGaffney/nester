@@ -48,7 +48,7 @@ app.get("/", function(req, res){
             dates: dates,
             barks: barks,
             intensities: intensities,
-            durations: duratons
+            durations: durations
         }
         res.render("../www/index.html", context)
     })
