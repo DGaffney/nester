@@ -35,7 +35,12 @@ const findDocuments = function(db, callback) {
 		callback(docs);
 	});
 }
-
+app.get("/", function(req, res){
+    context = {
+        events: findDocuments(),
+    }
+    res.render("www/index.html", context)
+})
 // app.use(express.static('files'))
 http.listen(9123, function() {
 	console.log('listening on *:9123');
