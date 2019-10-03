@@ -60,8 +60,8 @@ mongo.connect(url, (err, client) => {
   if (err) return console.log(err)
   db = client.db("nest") // whatever your database name is
   collection = db.collection('events')
-  http.listen(9123, function() {
-  	console.log('listening on *:9123');
+  http.listen(80, function() {
+  	console.log('listening on *:80');
   });
 })
 
