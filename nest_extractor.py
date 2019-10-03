@@ -104,10 +104,10 @@ def download_latest_dump(driver):
 
 def extract_latest_events():
     time.sleep(60)
-    os.popen("rm -r NEST_DATA")
+    rmed = os.popen("rm -r NEST_DATA").read()
     most_recent_file = sorted([e for e in os.popen("ls").read().split("\n") if "NEST_DATA" in e])[-1]
-    os.popen("unzip "+most_recent_file)
-    relevant_file = os.popen("find . | grep cuepoints.json").read().strip()
+    unzipped = os.popen("unzip "+most_recent_file).read()
+    relevant_file = os.popen("find NEST_DATA | grep cuepoints.json").read().strip()
     import code; code.interact(local=dict(globals(), **locals())) 
     data = json.loads(open(relevant_file).read())
     events = [e for e in data if e["importance_triggers"] and e["detectors"] == "[100003]"]
