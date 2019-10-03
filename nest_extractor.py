@@ -38,15 +38,23 @@ driver = webdriver.Chrome(chrome_options=chrome_options)
 credentials = {"username": "itsme@devingaffney.com", "password": "Bototo13."}
 client = pymongo.MongoClient("localhost", 27017)
 db = client.nest
+def take_snap(driver, text):
+    print(text)
+    driver.save_screenshot("pics/"+text.lower().replace(" ", "_")+".png")
+
 def login(driver, credentials):
     driver.get("https://home.nest.com/login/?next=https://home.nest.com/")
     time.sleep(random.uniform(1,3))
-    driver.find_element_by_class_name("_nest-sign-in_1f0amb").click()
+    take_snap(driver, "Logging in")
+    [e for e in driver.find_elements_by_tag_name("a") if e.get_attribute("role") == "button"][0].click()
+    take_snap(driver, "Clicked Login")
+    time.sleep(random.uniform(1,3))
     for char in credentials["username"]:
         actions = ActionChains(driver)
         actions = actions.send_keys(char)
         actions.perform()
         time.sleep(random.uniform(0.01,0.1))
+    take_snap(driver, "Entered Login Name")
     time.sleep(random.uniform(1,3))
     actions = ActionChains(driver)
     actions = actions.send_keys(Keys.TAB)
@@ -57,17 +65,21 @@ def login(driver, credentials):
         actions = actions.send_keys(char)
         actions.perform()
         time.sleep(random.uniform(0.01,0.1))
+    take_snap(driver, "Entered Login Password")
     driver.find_element_by_class_name("spin-button").click()
-    driver.save_screenshot("blah.png")
+    take_snap(driver, "Logged in")
 
 def request_data(driver):
     driver.get("https://myaccount.nest.com/mynestdata")
     time.sleep(random.uniform(8, 10))
-    driver.find_element_by_id("ember406").click()
+    take_snap(driver, "Requesting export")
+    [e for e in driver.find_elements_by_tag_name("a") if e.text == "Request my data"][0].click()
+    take_snap(driver, "Clicked")
     time.sleep(random.uniform(8, 10))
-    for toggle in driver.find_elements_by_class_name("_native-control_13mho6"):
+    for toggle in [e for e in driver.find_elements_by_tag_name("input") if e.get_attribute("role") == 'switch']:
         time.sleep(random.uniform(0.1,0.3))
         toggle.click()
+    take_snap(driver, "Toggled datasets")
     time.sleep(random.uniform(8,10))
     button = [b for b in driver.find_elements_by_tag_name("button") if b.text == "Create Archive"][0]
     button.click()
@@ -80,8 +92,10 @@ def download_latest_dump(driver):
             driver.get("https://myaccount.nest.com/mynestdata")
             try_count += 1
             time.sleep(random.uniform(8,10))
-            button = [b for b in driver.find_elements_by_tag_name("button") if b.text == "DOWNLOAD"][1]
+            take_snap(driver, "Attempt Download Try "+str(try_count))
+            button = [b for b in driver.find_elements_by_tag_name("button") if b.text == "DOWNLOAD"][0]
             button.click()
+            take_snap(driver, "Clicked Download Try "+str(try_count))
             exhausted = True
         except:
             print("Button Not Found!")
@@ -109,7 +123,7 @@ def extract_latest_events():
 def run():
     login(driver, credentials)
     download_latest_dump(driver)
-    request_data(driver)
     extract_latest_events()
+    request_data(driver)
 
 run()
