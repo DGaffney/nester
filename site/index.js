@@ -9,37 +9,29 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 var http = require('http').Server(app);
-var MongoClient = require('mongodb').MongoClient,
-f = require('util').format,
+var f = require('util').format,
 assert = require('assert');
-var url = 'mongodb://localhost:27017';
-const client = new MongoClient(url);
-const connection = client.connect()
-connection.then(() => {
-    const doc = { id: 3 }
-    const db = client.db('database_name')
-    const coll = db.collection('collection_name')
-    coll.insertOne(doc, (err, result) => {
-        if(err) throw err
-    })
+const mongo = require('mongodb').MongoClient
+const url = 'mongodb://localhost:27017';
+mongo.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }, (err, client) => {
+  if (err) {
+    console.error(err)
+    return
+  }
 })
-// Use connect method to connect to the Server
-const findDocuments = function(db, callback) {
-	// Get the documents collection
-	const collection = db.collection('events');
-	// Find some documents
-	collection.find({}).sort([
-		['created_at', -1]
-	]).toArray(function(err, docs) {
-		assert.equal(err, null);
-		callback(docs);
-	});
-}
+const db = client.db('nest')
+const collection = db.collection('events')
+
 app.get("/", function(req, res){
-    context = {
-        events: findDocuments(),
-    }
-    res.render("www/index.html", context)
+    collection.find().toArray((err, items) => {
+        context = {
+            events: items,
+        }
+        res.render("www/index.html", context)
+    })
 })
 // app.use(express.static('files'))
 http.listen(9123, function() {
