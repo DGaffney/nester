@@ -1,4 +1,8 @@
 while true
-  `python3 nest_extractor.py`
-  sleep(60*60*24)
+  if Time.now.hour > 21 and Time.now.hour < 23
+    `python3 nest_extractor.py`
+    sleep(60*5)
+  else
+    sleep(60*10)
+  end
 end
