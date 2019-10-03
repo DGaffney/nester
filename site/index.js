@@ -34,7 +34,6 @@ app.get("/", function(req, res){
                 mapped_by_date[date]["durations"].push(events[i]["duration"])
             }
         }
-        dates = mapped_by_date
         barks = []
         intensities = []
         durations = []
