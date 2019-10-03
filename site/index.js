@@ -21,7 +21,7 @@ app.get("/", function(req, res){
         context = {
             events: items,
         }
-        res.render("www/index.html", context)
+        res.render("../www/index.html", context)
     })
 })
 // app.use(express.static('files'))
