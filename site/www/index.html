@@ -33,6 +33,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
+  <script>
+      new Chart(document.getElementById("line-chart"), {
+          type: 'line',
+          data: {
+              labels: ["2019-10-02"],
+              datasets: [{
+                  data: [2],
+                  label: "Barks",
+                  borderColor: "#3e95cd",
+                  fill: false
+              }]
+          },
+          options: {
+              title: {
+                  display: true,
+                  text: "Dog Events",
+              }
+          }
+      })
+  </script>
   <header class="masthead text-center text-white">
     <div class="masthead-content">
       <div class="container">
