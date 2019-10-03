@@ -24,7 +24,7 @@ app.get("/", function(req, res){
 // app.use(express.static('files'))
 var db
 var collection
-MongoClient.connect(url, (err, client) => {
+mongo.connect(url, (err, client) => {
   if (err) return console.log(err)
   db = client.db("nest") // whatever your database name is
   collection = db.collection('events')
