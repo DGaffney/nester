@@ -24,7 +24,6 @@ connection.then(() => {
     })
 })
 // Use connect method to connect to the Server
-var io = require('socket.io')(http)
 const findDocuments = function(db, callback) {
 	// Get the documents collection
 	const collection = db.collection('scored_posts');
