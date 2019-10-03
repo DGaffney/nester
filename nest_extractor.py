@@ -61,7 +61,10 @@ def login(driver, credentials):
     driver.save_screenshot("blah.png")
 
 def request_data(driver):
-    driver.get("https://myaccount.nest.com/mynestdata/request")
+    driver.get("https://myaccount.nest.com/mynestdata")
+    time.sleep(random.uniform(8, 10))
+    driver.find_element_by_id("ember406").click()
+    time.sleep(random.uniform(8, 10))
     for toggle in driver.find_elements_by_class_name("_native-control_13mho6"):
         time.sleep(random.uniform(0.1,0.3))
         toggle.click()
