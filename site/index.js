@@ -13,18 +13,6 @@ var f = require('util').format,
 assert = require('assert');
 const mongo = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017';
-mongo.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }, (err, client) => {
-const db = client.db('nest')
-const collection = db.collection('events')
-  if (err) {
-    console.error(err)
-    return
-  }
-})
-
 app.get("/", function(req, res){
     collection.find().toArray((err, items) => {
         context = {
@@ -34,8 +22,15 @@ app.get("/", function(req, res){
     })
 })
 // app.use(express.static('files'))
-http.listen(9123, function() {
-	console.log('listening on *:9123');
-});
+var db
+var collection
+MongoClient.connect(url, (err, client) => {
+  if (err) return console.log(err)
+  db = client.db("nest") // whatever your database name is
+  collection = db.collection('events')
+  http.listen(9123, function() {
+  	console.log('listening on *:9123');
+  });
+})
 
 app.use('/', express.static('www'));
