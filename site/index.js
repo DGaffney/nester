@@ -16,10 +16,39 @@ var f = require('util').format,
 assert = require('assert');
 const mongo = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017';
+const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
 app.get("/", function(req, res){
-    collection.find().toArray((err, items) => {
+    var events
+    collection.find().sort({"time": 1}).toArray((err, items) => {
+        events = items
+        dates = []
+        mapped_by_date = {}
+        for (i = 0; i < events.length; i++) {
+            date = events[i]["time"].toLocaleDateString()
+            if (mapped_by_date[date]== null){
+                dates.push(date)
+                mapped_by_date[date] = {"barks": 1, "peak_sound_intensities": [events[i]["peak_sound_intensity"]], "durations": [events[i]["duration"]] }
+            } else {
+                mapped_by_date[date]["barks"] += 1
+                mapped_by_date[date]["peak_sound_intensities"].push(events[i]["peak_sound_intensity"])
+                mapped_by_date[date]["durations"].push(events[i]["duration"])
+            }
+        }
+        dates = mapped_by_date
+        barks = []
+        intensities = []
+        durations = []
+        for (i = 0; i < dates.length; i++){
+            barks.push(mapped_by_date[dates[i]]["barks"])
+            intensities.push(average(mapped_by_date[dates[i]]["peak_sound_intensities"]))
+            durations.push(average(mapped_by_date[dates[i]]["durations"]))
+            
+        }
         context = {
-            events: items,
+            dates: dates,
+            barks: barks,
+            intensities: intensities,
+            durations: duratons
         }
         res.render("../www/index.html", context)
     })
