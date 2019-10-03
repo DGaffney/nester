@@ -123,9 +123,15 @@ def extract_latest_events():
             })
 
 def run():
-    login(driver, credentials)
-    download_latest_dump(driver)
+    try:
+        login(driver, credentials)
+        try:
+            request_data(driver)
+        except:
+            print("Couldn't request data")
+        download_latest_dump(driver)
+    except:
+        print("Couldn't login and/or download")
     extract_latest_events()
-    request_data(driver)
 
 run()
