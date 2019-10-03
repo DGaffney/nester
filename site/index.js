@@ -44,7 +44,7 @@ app.get("/", function(req, res){
             
         }
         context = {
-            dates: dates,
+            dates: dates.join("', '"),
             barks: barks,
             intensities: intensities,
             durations: durations
