@@ -57,7 +57,7 @@
           data: {
               labels: {{ dates }},
               datasets: [{
-                  data: {{ barks }},
+                  data: [{{ barks }}],
                   label: "Barks",
                   borderColor: "#3e95cd",
                   fill: false
@@ -75,7 +75,7 @@
           data: {
               labels: {{ dates }},
               datasets: [{
-                  data: {{ intensities }},
+                  data: [{{ intensities }}],
                   label: "Bark Intensity (internal Nest scale)",
                   borderColor: "#3e95cd",
                   fill: false
@@ -93,7 +93,7 @@
           data: {
               labels: {{ dates }},
               datasets: [{
-                  data: {{ durations }},
+                  data: [{{ durations }}],
                   label: "Durations (seconds)",
                   borderColor: "#3e95cd",
                   fill: false
