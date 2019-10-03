@@ -43,6 +43,7 @@ app.get("/", function(req, res){
             durations.push(average(mapped_by_date[dates[i]]["durations"]))
             
         }
+        console.log(dates.join("', '"))
         context = {
             dates: dates.join("', '"),
             barks: barks,
