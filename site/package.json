@@ -1,7 +1,7 @@
 {
-  "name": "neighborhood-watch",
+  "name": "nester",
   "version": "1.0.0",
-  "description": "Localet",
+  "description": "Nester",
   "main": "index.js",
   "repository": {
     "type": "git",
