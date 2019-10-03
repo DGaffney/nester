@@ -33,6 +33,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
+  <header class="masthead text-center text-white">
+    <div class="masthead-content">
+      <div class="container">
+        <h1 class="masthead-heading mb-0">DOG BARKS</h1>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+      <div class="row">
+          <canvas id="line-chart" width="960" height="450"></canvas>
+      </div>
+  </div>
   <script>
       new Chart(document.getElementById("line-chart"), {
           type: 'line',
@@ -53,13 +65,6 @@
           }
       })
   </script>
-  <header class="masthead text-center text-white">
-    <div class="masthead-content">
-      <div class="container">
-        <h1 class="masthead-heading mb-0">DOG BARKS</h1>
-      </div>
-    </div>
-  </header>
     <footer class="footer py-5 bg-black">
       <div class="container">
         <span class="text-muted"><a class="secondary" href="http://devingaffney.com">Home</a></span>
