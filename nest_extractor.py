@@ -103,6 +103,7 @@ def download_latest_dump(driver):
                 exhausted = True
 
 def extract_latest_events():
+    time.sleep(60)
     os.popen("rm -r NEST_DATA")
     most_recent_file = sorted([e for e in os.popen("ls").read().split("\n") if "NEST_DATA" in e])[-1]
     os.popen("unzip "+most_recent_file)
