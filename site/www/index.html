@@ -42,17 +42,22 @@
   </header>
   <div class="container">
       <div class="row">
-          <canvas id="line-chart" width="960" height="450"></canvas>
+          <canvas id="bark-count" width="960" height="450"></canvas>
+      </div>
+      <div class="row">
+          <canvas id="bark-intensity" width="960" height="450"></canvas>
+      </div>
+      <div class="row">
+          <canvas id="bark-duration" width="960" height="450"></canvas>
       </div>
   </div>
-  {{ events }}
   <script>
-      new Chart(document.getElementById("line-chart"), {
+      new Chart(document.getElementById("bark-count"), {
           type: 'line',
           data: {
-              labels: ["2019-10-02"],
+              labels: {{ dates }},
               datasets: [{
-                  data: [2],
+                  data: {{ barks }},
                   label: "Barks",
                   borderColor: "#3e95cd",
                   fill: false
@@ -61,7 +66,43 @@
           options: {
               title: {
                   display: true,
-                  text: "Dog Events",
+                  text: "Bark Count",
+              }
+          }
+      })
+      new Chart(document.getElementById("bark-intensity"), {
+          type: 'line',
+          data: {
+              labels: {{ dates }},
+              datasets: [{
+                  data: {{ intensities }},
+                  label: "Bark Intensity (internal Nest scale)",
+                  borderColor: "#3e95cd",
+                  fill: false
+              }]
+          },
+          options: {
+              title: {
+                  display: true,
+                  text: "Bark Intensity",
+              }
+          }
+      })
+      new Chart(document.getElementById("bark-duration"), {
+          type: 'line',
+          data: {
+              labels: {{ dates }},
+              datasets: [{
+                  data: {{ durations }},
+                  label: "Durations (seconds)",
+                  borderColor: "#3e95cd",
+                  fill: false
+              }]
+          },
+          options: {
+              title: {
+                  display: true,
+                  text: "Bark Duration",
               }
           }
       })
