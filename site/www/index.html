@@ -55,7 +55,7 @@
       new Chart(document.getElementById("bark-count"), {
           type: 'line',
           data: {
-              labels: {{{ dates }}},
+              labels: [{{{ dates }}}],
               datasets: [{
                   data: [{{ barks }}],
                   label: "Barks",
@@ -73,7 +73,7 @@
       new Chart(document.getElementById("bark-intensity"), {
           type: 'line',
           data: {
-              labels: {{ dates }},
+              labels: [{{{ dates }}}],
               datasets: [{
                   data: [{{ intensities }}],
                   label: "Bark Intensity (internal Nest scale)",
@@ -91,7 +91,7 @@
       new Chart(document.getElementById("bark-duration"), {
           type: 'line',
           data: {
-              labels: {{ dates }},
+              labels: [{{{ dates }}}],
               datasets: [{
                   data: [{{ durations }}],
                   label: "Durations (seconds)",
