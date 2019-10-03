@@ -55,7 +55,7 @@
       new Chart(document.getElementById("bark-count"), {
           type: 'line',
           data: {
-              labels: {{ dates }},
+              labels: {{{ dates }}},
               datasets: [{
                   data: [{{ barks }}],
                   label: "Barks",
