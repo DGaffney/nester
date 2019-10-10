@@ -43,6 +43,7 @@ def take_snap(driver, text):
     driver.save_screenshot("pics/"+text.lower().replace(" ", "_")+".png")
 
 def login(driver, credentials):
+    time.sleep(random.uniform(8, 10))
     driver.get("https://home.nest.com/login/?next=https://home.nest.com/")
     time.sleep(random.uniform(5,7))
     take_snap(driver, "Logging in")
@@ -70,6 +71,7 @@ def login(driver, credentials):
     take_snap(driver, "Logged in")
 
 def request_data(driver):
+    time.sleep(random.uniform(8, 10))
     driver.get("https://myaccount.nest.com/mynestdata")
     time.sleep(random.uniform(8, 10))
     take_snap(driver, "Requesting export")
@@ -85,6 +87,7 @@ def request_data(driver):
     button.click()
 
 def download_latest_dump(driver):
+    time.sleep(random.uniform(8, 10))
     exhausted = False
     try_count = 0
     while not exhausted:
