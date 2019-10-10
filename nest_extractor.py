@@ -44,7 +44,7 @@ def take_snap(driver, text):
 
 def login(driver, credentials):
     driver.get("https://home.nest.com/login/?next=https://home.nest.com/")
-    time.sleep(random.uniform(1,3))
+    time.sleep(random.uniform(5,7))
     take_snap(driver, "Logging in")
     [e for e in driver.find_elements_by_tag_name("a") if e.get_attribute("role") == "button"][0].click()
     take_snap(driver, "Clicked Login")
