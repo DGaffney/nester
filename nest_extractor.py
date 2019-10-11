@@ -102,6 +102,7 @@ def download_latest_dump(driver):
             exhausted = True
         except:
             print("Button Not Found!")
+            try_count += 1
             if try_count > 3:
                 exhausted = True
 
