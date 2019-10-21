@@ -17,13 +17,21 @@ assert = require('assert');
 const mongo = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017';
 const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
+var getDaysArray = function(start, end) {
+    for(var arr=[],dt=start; dt<=end; dt.setDate(dt.getDate()+1)){
+        arr.push(new Date(dt).toLocaleDateString().split(",")[0]);
+    }
+    return arr;
+};
 app.get("/", function(req, res){
     var events
     collection.find().sort({"time": 1}).toArray((err, items) => {
         events = items
         dates = []
+        date_objs = []
         mapped_by_date = {}
         for (i = 0; i < events.length; i++) {
+            date_objs.push(events[i]["time"])
             date = events[i]["time"].toLocaleDateString()
             if (mapped_by_date[date]== null){
                 dates.push(date)
@@ -44,7 +52,7 @@ app.get("/", function(req, res){
             
         }
         context = {
-            dates: "'"+dates.join("', '")+"'",
+            dates: "'"+getDaysArray(date_objs[0], date_objs[date_objs.length-1]).join("', '")+"'",
             barks: barks,
             intensities: intensities,
             durations: durations
