@@ -47,17 +47,17 @@ app.get("/", function(req, res){
         durations = []
         dates = getDaysArray(date_objs[0], date_objs[date_objs.length-1])
         for (i = 0; i < dates.length; i++){
-            if (mapped_by_date[dates[i]]["barks"] == null){
+            if (mapped_by_date[dates[i]] == null){
                 barks.push(0)
             } else {
                 barks.push(mapped_by_date[dates[i]]["barks"])
             }
-            if (mapped_by_date[dates[i]]["peak_sound_intensities"] == null){
+            if (mapped_by_date[dates[i]] == null){
                 intensities.push(0)
             } else {
                 intensities.push(average(mapped_by_date[dates[i]]["peak_sound_intensities"]))
             }
-            if (mapped_by_date[dates[i]]["durations"] == null){
+            if (mapped_by_date[dates[i]] == null){
                 durations.push(0)
             } else {
                 durations.push(average(mapped_by_date[dates[i]]["durations"]))
