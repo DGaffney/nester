@@ -45,14 +45,26 @@ app.get("/", function(req, res){
         barks = []
         intensities = []
         durations = []
+        dates = getDaysArray(date_objs[0], date_objs[date_objs.length-1])
         for (i = 0; i < dates.length; i++){
-            barks.push(mapped_by_date[dates[i]]["barks"])
-            intensities.push(average(mapped_by_date[dates[i]]["peak_sound_intensities"]))
-            durations.push(average(mapped_by_date[dates[i]]["durations"]))
-            
+            if (mapped_by_date[dates[i]]["barks"] == null){
+                barks.push(0)
+            } else {
+                barks.push(mapped_by_date[dates[i]]["barks"])
+            }
+            if (mapped_by_date[dates[i]]["peak_sound_intensities"] == null){
+                intensities.push(0)
+            } else {
+                intensities.push(average(mapped_by_date[dates[i]]["peak_sound_intensities"]))
+            }
+            if (mapped_by_date[dates[i]]["durations"] == null){
+                durations.push(0)
+            } else {
+                durations.push(average(mapped_by_date[dates[i]]["durations"]))
+            }
         }
         context = {
-            dates: "'"+getDaysArray(date_objs[0], date_objs[date_objs.length-1]).join("', '")+"'",
+            dates: "'"+dates.join("', '")+"'",
             barks: barks,
             intensities: intensities,
             durations: durations
