@@ -126,6 +126,7 @@ def extract_latest_events():
                 "duration": event["duration"],
                 "time": datetime.datetime.fromtimestamp(float(event["_timestamp"]))
             })
+    cped = os.popen("rm NEST_DATA*.zip").read()
 
 def run():
     try:
