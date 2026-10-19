@@ -11,7 +11,7 @@
   "license": "ISC",
   "homepage": "https://github.com/compose-ex/websockets#readme",
   "dependencies": {
-    "basic-auth-connect": "1.0.0",
+    "basic-auth-connect": "1.1.0",
     "config": "^1.24.0",
     "consolidate": "0.15.1",
     "express": "^4.16.4",
